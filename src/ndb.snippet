@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>NUnit Test Class</Title>
+			<Shortcut>ndb</Shortcut>
+			<Description>Adds base NUnit tests class with all usual attributes of 'database' category</Description>
+			<Author>DL</Author>
+        </Header>
+        <Snippet>
+			<Declarations>
+                <Literal default="true" Editable="false">
+                    <ID>classname</ID>
+                    <ToolTip>Class name</ToolTip>
+                    <Function>ClassName().Replace("Tests", "")</Function>
+                    <Default>ClassNamePlaceholder</Default>
+                </Literal>
+				<Literal default="true" Editable="false">
+                    <ID>testclassname</ID>
+                    <ToolTip>Test class name</ToolTip>
+                    <Function>ClassName()</Function>
+                    <Default>TestClassNamePlaceholder</Default>
+                </Literal>
+            </Declarations>
+            <Code Language="CSharp">
+                <![CDATA[
+					[TestFixture, Category("database")]
+					[Category(nameof($classname$))]
+					public class $testclassname$ : DbTestBase
+					{
+                        protected override void SetDataInDatabase(LearnContextPsg ctx)
+						{
+							// add something in db
+						}
+					
+						[Test]
+						public void Test()
+						{
+							Assert.IsTrue(false);
+						}
+					}
+					]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
